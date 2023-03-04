@@ -1,0 +1,22 @@
+---
+import Card from '~/components/Card.astro';
+import Layout from '../layouts/Layout.astro';
+
+import config from '@config';
+import { readData } from '~/lib/data';
+
+const data = await Promise.all(config.map((w) => readData(w)));
+---
+
+<Layout title="Olek">
+	<h1 class="font-extrabold text-5xl tracking-tight mb-2">Olek</h1>
+	<h2 class="font-medium text-xl text-neutral-500 mb-12">
+		Status page for Ryan's websites and services.
+	</h2>
+
+	<ul class="flex flex-col gap-y-8 mb-12">
+		{data.map((website) => <Card data={website} />)}
+	</ul>
+
+	<p class="text-neutral-500">Last checked: {new Date().toISOString()}</p>
+</Layout>

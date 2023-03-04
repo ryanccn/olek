@@ -1,0 +1,79 @@
+---
+import type { WebsiteData } from '~/types/data';
+
+export interface Props {
+	data: WebsiteData;
+}
+
+const { data } = Astro.props;
+---
+
+<li>
+	<a
+		href={data.url}
+		class="flex flex-col rounded-lg bg-neutral-50 hover:bg-neutral-100 p-8 items-start focus:outline-none focus:ring"
+	>
+		<h2 class="flex items-center gap-4 mb-1 flex-wrap">
+			<span class="font-bold tracking-tight text-2xl">{data.name}</span>
+
+			{
+				data.uptime && (
+					<div class="flex items-center gap-x-1">
+						<span
+							class:list={[
+								'block w-2 h-2 rounded-full',
+								data.uptime.history[0] ? 'bg-green-400' : 'bg-red-400',
+							]}
+						/>
+						{data.uptime.history[0] && data.uptime.history[0] > 0 && (
+							<span class="block rounded-full text-green-400 text-xs font-medium">
+								{data.uptime.history[0].toFixed(1)}ms
+							</span>
+						)}
+					</div>
+				)
+			}
+		</h2>
+
+		<p class="text-neutral-400 text-sm mb-5">{data.url}</p>
+
+		{
+			data.uptime && (
+				<ol class="grid grid-cols-[repeat(30,_minmax(0,_1fr))] gap-0.5 w-full h-10">
+					{[...data.uptime.history].reverse().map((check, idx) => (
+						<li
+							class:list={[
+								'w-full h-full bg-green-400',
+								idx === 0 ? 'rounded-l' : null,
+								idx === data.uptime!.history.length - 1 ? 'rounded-r' : null,
+								check > 0
+									? 'bg-green-400'
+									: check === 0
+									? 'bg-red-400'
+									: 'bg-neutral-200',
+							]}
+							aria-label={check > 0 ? 'Up' : check === 0 ? 'Down' : 'Unknown'}
+						/>
+					))}
+				</ol>
+			)
+		}
+
+		{
+			data.lighthouse && (
+				<div class="grid grid-cols-2 lg:grid-cols-4 self-stretch gap-6 mt-6">
+					{['Performance', 'Accessibility', 'Best Practices', 'SEO'].map(
+						(key) => (
+							<div class="flex flex-col">
+								<span class="text-sm font-medium">{key}</span>
+								<span class="text-lg font-bold">
+									{(data.lighthouse![key]! * 100).toFixed(0)}
+								</span>
+							</div>
+						)
+					)}
+				</div>
+			)
+		}
+	</a>
+</li>
