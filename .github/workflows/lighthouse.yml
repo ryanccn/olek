@@ -19,8 +19,10 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Update uptime
+      - name: Update Lighthouse
         run: yarn run update:lighthouse
+        env:
+          NODE_ENV: production
 
       - name: Commit & push
         uses: actions-js/push@master

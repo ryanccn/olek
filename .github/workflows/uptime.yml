@@ -21,6 +21,8 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Update uptime
         run: yarn run update:uptime
+        env:
+          NODE_ENV: production
 
       - name: Commit & push
         uses: actions-js/push@master
