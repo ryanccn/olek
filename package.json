@@ -19,11 +19,10 @@
 		"@sindresorhus/slugify": "^2.2.0",
 		"@types/node": "^18.14.6",
 		"autoprefixer": "^10.4.13",
-		"chrome-aws-lambda": "^10.1.0",
 		"date-fns": "^2.29.3",
 		"lighthouse": "^10.0.2",
 		"postcss": "^8.4.21",
-		"puppeteer-core": "^19.7.2",
+		"puppeteer": "^19.7.2",
 		"tailwindcss": "^3.2.7",
 		"tsx": "^3.12.3",
 		"typescript": "^4.9.5"

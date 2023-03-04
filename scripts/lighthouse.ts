@@ -1,27 +1,11 @@
-import { launch, type PuppeteerLaunchOptions } from 'puppeteer-core';
+import { launch } from 'puppeteer';
 import lighthouse from 'lighthouse';
 
 import { readData, writeData } from '~/lib/data';
 
 import config from '@config';
 
-let options: PuppeteerLaunchOptions;
-
-if (process.env.AWS_LAMBDA_FUNCTION_NAME) {
-	const { default: chromeAwsLambda } = await import('chrome-aws-lambda');
-	options = {
-		executablePath: await chromeAwsLambda.executablePath,
-		headless: chromeAwsLambda.headless,
-		defaultViewport: chromeAwsLambda.defaultViewport,
-		args: chromeAwsLambda.args,
-	};
-} else {
-	if (!process.env.CHROMIUM_PATH)
-		throw new Error('No CHROMIUM_PATH defined in environment!');
-	options = { executablePath: process.env.CHROMIUM_PATH, headless: false };
-}
-
-const browser = await launch(options);
+const browser = await launch({ headless: true });
 const page = await browser.newPage();
 
 for (const website of config) {
