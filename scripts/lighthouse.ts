@@ -10,6 +10,8 @@ import config from '@config';
 	const page = await browser.newPage();
 
 	for (const website of config) {
+		if (website.lighthouse?.enabled === false) continue;
+
 		const results = await lighthouse(website.url, undefined, undefined, page);
 		if (!results) throw new Error('No results returned!');
 
