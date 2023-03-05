@@ -44,7 +44,7 @@ const Index: NextPage<Props> = ({ data }) => {
 
 			<div
 				className={clsx(
-					'mb-10 flex items-center justify-center gap-x-4 rounded-lg px-3 py-10 text-2xl font-bold text-white',
+					'mb-10 flex flex-col items-center justify-center gap-4 rounded-lg px-4 py-12 text-2xl font-bold text-white lg:flex-row',
 					everythingGood ? 'bg-green-500' : 'bg-red-500'
 				)}
 			>
