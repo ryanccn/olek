@@ -1,9 +1,11 @@
+import type { NextPage, GetStaticProps } from 'next';
+
 import Card from '~/components/Card';
+import Head from 'next/head';
 
 import config from '@config';
 import { readData } from '~/lib/data';
 
-import type { GetStaticProps, NextPage } from 'next';
 import type { WebsiteData } from '~/types/data';
 
 interface Props {
@@ -12,7 +14,11 @@ interface Props {
 
 const Index: NextPage<Props> = ({ data }) => {
 	return (
-		<div>
+		<>
+			<Head>
+				<title>Olek · Status page for Ryan's websites and services.</title>
+			</Head>
+
 			<h1 className="font-extrabold text-5xl tracking-tight mb-2">Olek</h1>
 			<h2 className="font-medium text-xl text-neutral-500 mb-12">
 				Status page for Ryan's websites and services.
@@ -23,7 +29,7 @@ const Index: NextPage<Props> = ({ data }) => {
 					<Card data={website} key={website.url} />
 				))}
 			</ul>
-		</div>
+		</>
 	);
 };
 
