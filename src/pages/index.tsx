@@ -9,6 +9,7 @@ import { CheckCheck, XCircle } from 'lucide-react';
 
 import config from '@config';
 import { readData } from '~/lib/data';
+import pLimit from 'p-limit';
 
 import type { WebsiteData } from '~/types/data';
 import type { ConfigWebsite } from '~/types/config';
@@ -44,7 +45,7 @@ const Index: NextPage<Props> = ({ data }) => {
 
 			<div
 				className={clsx(
-					'mb-10 flex flex-col items-center justify-center gap-4 rounded-lg px-4 py-12 text-2xl font-bold text-white lg:flex-row',
+					'mb-10 flex flex-col items-center justify-center gap-4 rounded-lg px-4 py-12 text-center text-2xl font-bold text-white lg:flex-row',
 					everythingGood ? 'bg-green-500' : 'bg-red-500'
 				)}
 			>
@@ -70,8 +71,9 @@ const Index: NextPage<Props> = ({ data }) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
+	const lim = pLimit(10);
 	const data = await Promise.all(
-		config.map(async (w) => ({ config: w, data: await readData(w) }))
+		config.map((w) => lim(async () => ({ config: w, data: await readData(w) })))
 	);
 
 	return { props: { data }, revalidate: 60 };
