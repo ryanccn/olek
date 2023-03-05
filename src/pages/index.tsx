@@ -20,7 +20,7 @@ const Index: NextPage<Props> = ({ data }) => {
 			</Head>
 
 			<h1 className="font-extrabold text-5xl tracking-tight mb-2">Olek</h1>
-			<h2 className="font-medium text-xl text-neutral-500 mb-12">
+			<h2 className="font-medium text-xl text-neutral-500 dark:text-neutral-400 mb-12">
 				Status page for Ryan&apos;s websites and services.
 			</h2>
 

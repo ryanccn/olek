@@ -13,7 +13,7 @@ const Card = ({ data }: { data: WebsiteData }) => {
 		<li>
 			<a
 				href={data.url}
-				className="flex flex-col rounded-lg bg-neutral-50 hover:bg-neutral-100 p-8 items-start focus:outline-none focus:ring"
+				className="flex flex-col rounded-lg bg-neutral-50 hover:bg-neutral-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 p-8 items-start focus:outline-none focus:ring"
 			>
 				<h2 className="flex items-center gap-4 mb-1 flex-wrap">
 					<span className="font-bold tracking-tight text-2xl">{data.name}</span>
@@ -50,7 +50,7 @@ const Card = ({ data }: { data: WebsiteData }) => {
 										? 'bg-green-400'
 										: check === 0
 										? 'bg-red-400'
-										: 'bg-neutral-200',
+										: 'bg-neutral-200 dark:bg-neutral-600',
 								])}
 								aria-label={check > 0 ? 'Up' : check === 0 ? 'Down' : 'Unknown'}
 							/>
