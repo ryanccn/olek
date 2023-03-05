@@ -5,26 +5,39 @@ import { readData, writeData } from '~/lib/data';
 
 import config from '@config';
 
-const browser = await launch({ headless: true });
-const page = await browser.newPage();
+(async () => {
+	const browser = await launch({ headless: true });
+	const page = await browser.newPage();
 
-for (const website of config) {
-	const results = await lighthouse(website.url, undefined, undefined, page);
-	if (!results) throw new Error('No results returned!');
+	for (const website of config) {
+		const results = await lighthouse(website.url, undefined, undefined, page);
+		if (!results) throw new Error('No results returned!');
 
-	const scores = results.lhr.categories;
+		const scores = results.lhr.categories;
 
-	let websiteData = await readData(website);
+		let websiteData = await readData(website);
 
-	websiteData.lighthouse = {};
-	for (const key in scores) {
-		const score = scores[key];
-		if (!score || !score.title || !score.score) continue;
+		websiteData.lighthouse = {};
 
-		websiteData.lighthouse[score.title] = score.score;
+		const reportCategories = {
+			performance: 'performance',
+			accessibility: 'accessibility',
+			'best-practices': 'bestPractices',
+			seo: 'seo',
+		};
+
+		for (const key of Object.keys(reportCategories)) {
+			const score = scores[key];
+			if (!score || !score.title || !score.score) continue;
+
+			websiteData.lighthouse[reportCategories[key]] = score.score;
+		}
+
+		await writeData(website, websiteData);
 	}
 
-	await writeData(website, websiteData);
-}
-
-await browser.close();
+	await browser.close();
+})().catch((err) => {
+	console.error(err);
+	process.exit(1);
+});

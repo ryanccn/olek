@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type WebsitesUptime {
+  up          Int
+  all         Int
+  history     Float[]
+  lastChecked String
+}
+
+type WebsitesLighthouse {
+  performance   Float
+  accessibility Float
+  bestPractices Float
+  seo           Float
+}
+
+model websites {
+  id         String              @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  url        String              @unique
+  uptime     WebsitesUptime?
+  lighthouse WebsitesLighthouse?
+}

@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	body {
+		@apply flex flex-col mx-auto max-w-[80ch] px-8 py-36;
+	}
+}

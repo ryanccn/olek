@@ -26,6 +26,7 @@ jobs:
         run: yarn run update:uptime
         env:
           NODE_ENV: production
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Commit & push
         uses: actions-js/push@master

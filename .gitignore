@@ -2,8 +2,8 @@
 dist/
 /dev-data/
 
-# generated types
-.astro/
+# Next.js
+.next/
 
 # dependencies
 node_modules/
@@ -17,6 +17,7 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.local
 
 # IDEs
 .vscode/
