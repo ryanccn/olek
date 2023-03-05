@@ -4,7 +4,7 @@
 
 @layer components {
 	body {
-		@apply flex flex-col mx-auto max-w-[80ch] px-8 py-36;
+		@apply mx-auto flex max-w-[80ch] flex-col px-8 py-36;
 		@apply bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white;
 	}
 }

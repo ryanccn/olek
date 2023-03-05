@@ -37,21 +37,21 @@ const Index: NextPage<Props> = ({ data }) => {
 				<title>Olek</title>
 			</Head>
 
-			<h1 className="font-extrabold text-5xl tracking-tight mb-2">Olek</h1>
-			<h2 className="font-medium text-xl text-neutral-500 dark:text-neutral-400 mb-12">
+			<h1 className="mb-2 text-5xl font-extrabold tracking-tight">Olek</h1>
+			<h2 className="mb-12 text-xl font-medium text-neutral-500 dark:text-neutral-400">
 				Status page for Ryan&apos;s websites and services.
 			</h2>
 
 			<div
 				className={clsx(
-					'flex items-center justify-center gap-x-4 px-3 py-10 text-white font-bold text-2xl mb-10 rounded-lg',
+					'mb-10 flex items-center justify-center gap-x-4 rounded-lg px-3 py-10 text-2xl font-bold text-white',
 					everythingGood ? 'bg-green-500' : 'bg-red-500'
 				)}
 			>
 				{everythingGood ? (
-					<CheckCheck className="block w-6 h-6 stroke-[2.5]" />
+					<CheckCheck className="block h-6 w-6 stroke-[2.5]" />
 				) : (
-					<XCircle className="block w-6 h-6 stroke-[2.5]" />
+					<XCircle className="block h-6 w-6 stroke-[2.5]" />
 				)}
 				<span>
 					{everythingGood
@@ -60,7 +60,7 @@ const Index: NextPage<Props> = ({ data }) => {
 				</span>
 			</div>
 
-			<ul className="flex flex-col gap-y-8 mb-12">
+			<ul className="mb-12 flex flex-col gap-y-8">
 				{data.map((website) => (
 					<Card data={website} key={website.config.url} />
 				))}

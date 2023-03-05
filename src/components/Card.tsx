@@ -17,9 +17,9 @@ const Card = ({
 }) => {
 	return (
 		<li>
-			<div className="flex flex-col rounded-lg bg-neutral-50 dark:bg-neutral-800 p-8 items-start">
-				<h2 className="flex items-center gap-4 mb-8 flex-wrap">
-					<span className="font-bold tracking-tight text-2xl">
+			<div className="flex flex-col items-start rounded-lg bg-neutral-50 p-8 dark:bg-neutral-800">
+				<h2 className="mb-8 flex flex-wrap items-center gap-4">
+					<span className="text-2xl font-bold tracking-tight">
 						{data.config.name}
 					</span>
 
@@ -27,13 +27,13 @@ const Card = ({
 						<div className="flex items-center gap-x-1">
 							<span
 								className={clsx([
-									'block w-2 h-2 rounded-full',
+									'block h-2 w-2 rounded-full',
 									data.data.uptime.history[0] ? 'bg-green-400' : 'bg-red-400',
 								])}
 							/>
 							{data.data.uptime.history[0] &&
 							data.data.uptime.history[0] > 0 ? (
-								<span className="block rounded-full text-green-400 text-xs font-medium">
+								<span className="block rounded-full text-xs font-medium text-green-400">
 									{data.data.uptime.history[0].toFixed(1)}ms
 								</span>
 							) : null}
@@ -42,14 +42,14 @@ const Card = ({
 				</h2>
 
 				{data.data.uptime && (
-					<ol className="grid grid-cols-[repeat(30,_minmax(0,_1fr))] gap-0.5 w-full h-10">
+					<ol className="grid h-10 w-full grid-cols-[repeat(30,_minmax(0,_1fr))] gap-0.5">
 						{[...data.data.uptime.history].reverse().map((check, idx) => (
 							<li
 								key={idx}
 								className={clsx([
-									'w-full h-full bg-green-400',
+									'h-full w-full bg-green-400',
 									idx === 0 ? 'rounded-l' : null,
-									idx === data.data.uptime!.history.length - 1
+									idx === data.data.uptime.history.length - 1
 										? 'rounded-r'
 										: null,
 									check > 0
@@ -65,7 +65,7 @@ const Card = ({
 				)}
 
 				{data.data.lighthouse && (
-					<div className="grid grid-cols-2 lg:grid-cols-4 self-stretch gap-6 mt-6">
+					<div className="mt-6 grid grid-cols-2 gap-6 self-stretch lg:grid-cols-4">
 						{Object.keys(data.data.lighthouse).map((key) => (
 							<div className="flex flex-col" key={key}>
 								<span className="text-sm font-medium">
