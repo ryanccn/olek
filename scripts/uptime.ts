@@ -5,12 +5,21 @@ import config from '@config';
 (async () => {
 	for (const website of config) {
 		const tA = performance.now();
-		const response = await fetch(website.url, {
-			method: website.uptime?.method ?? 'HEAD',
-		});
+
+		let websiteIsUp = false;
+		try {
+			const response = await fetch(website.url, {
+				method: website.uptime?.method ?? 'HEAD',
+			});
+
+			websiteIsUp = response.ok;
+		} catch {
+			websiteIsUp = false;
+		}
+
 		const tB = performance.now();
 
-		let websiteData = await readData(website);
+		const websiteData = await readData(website);
 
 		websiteData.uptime = websiteData.uptime || {
 			history: new Array(30).fill(-1),
@@ -23,9 +32,11 @@ import config from '@config';
 			!websiteData.uptime.lastChecked ||
 			!isSameDay(new Date(), new Date(websiteData.uptime.lastChecked));
 
-		if (response.ok) {
+		if (websiteIsUp) {
 			if (shouldPushNewEntry) websiteData.uptime.history.unshift(tB - tA);
-			else websiteData.uptime.history[0] = tB - tA;
+			else
+				websiteData.uptime.history[0] =
+					(tB - tA + websiteData.uptime.history[0]) / 2;
 
 			websiteData.uptime.up += 1;
 		} else {
@@ -40,7 +51,7 @@ import config from '@config';
 			websiteData.uptime.lastChecked = new Date().toDateString();
 
 		console.log(
-			`${website.name} (${website.url}) response ok: ${response.ok}, should push new entry: ${shouldPushNewEntry}`
+			`${website.name} (${website.url}) is up: ${websiteIsUp}, should push new entry: ${shouldPushNewEntry}`
 		);
 
 		await writeData(website, websiteData);
