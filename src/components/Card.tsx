@@ -1,6 +1,8 @@
 import type { WebsiteData } from '~/types/data';
 import type { ConfigWebsite } from '~/types/config';
 
+import * as Tooltip from '@radix-ui/react-tooltip';
+
 import clsx from 'clsx';
 
 const readableLighthouseTitle = {
@@ -42,26 +44,49 @@ const Card = ({
 				</h2>
 
 				{data.data.uptime && (
-					<ol className="grid h-10 w-full grid-cols-[repeat(30,_minmax(0,_1fr))] gap-0.5">
-						{[...data.data.uptime.history].reverse().map((check, idx) => (
-							<li
-								key={idx}
-								className={clsx([
-									'h-full w-full bg-green-400',
-									idx === 0 ? 'rounded-l' : null,
-									idx === data.data.uptime.history.length - 1
-										? 'rounded-r'
-										: null,
-									check > 0
-										? 'bg-green-400'
-										: check === 0
-										? 'bg-red-400'
-										: 'bg-neutral-200 dark:bg-neutral-600',
-								])}
-								aria-label={check > 0 ? 'Up' : check === 0 ? 'Down' : 'Unknown'}
-							/>
-						))}
-					</ol>
+					<>
+						<p className="mb-4 text-xl font-bold">
+							{((data.data.uptime.up / data.data.uptime.all) * 100).toFixed(2)}%
+						</p>
+						<ol className="grid h-10 w-full grid-cols-[repeat(30,_minmax(0,_1fr))] gap-0.5">
+							{[...data.data.uptime.history].reverse().map((check, idx) => (
+								<Tooltip.Root delayDuration={250} key={idx}>
+									<Tooltip.Trigger asChild>
+										<li
+											className={clsx([
+												'h-full w-full bg-green-400',
+												idx === 0 ? 'rounded-l' : null,
+												idx === data.data.uptime.history.length - 1
+													? 'rounded-r'
+													: null,
+												check > 0
+													? 'bg-green-400'
+													: check === 0
+													? 'bg-red-400'
+													: 'bg-neutral-200 dark:bg-neutral-600',
+											])}
+											aria-label={
+												check > 0 ? 'Up' : check === 0 ? 'Down' : 'Unknown'
+											}
+										/>
+									</Tooltip.Trigger>
+									<Tooltip.Portal>
+										<Tooltip.Content
+											className="select-none rounded bg-neutral-100 px-2 py-1 text-xs font-medium shadow-sm data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade dark:bg-neutral-700"
+											sideOffset={5}
+										>
+											{check > 0
+												? `${check.toFixed(2)}ms`
+												: check === 0
+												? 'Down'
+												: 'Unavailable'}
+											<Tooltip.Arrow className="fill-neutral-100 dark:fill-neutral-700" />
+										</Tooltip.Content>
+									</Tooltip.Portal>
+								</Tooltip.Root>
+							))}
+						</ol>
+					</>
 				)}
 
 				{data.data.lighthouse && (
