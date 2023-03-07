@@ -36,6 +36,21 @@ const Index: NextPage<Props> = ({ data }) => {
 		<>
 			<Head>
 				<title>Olek</title>
+				<link
+					rel="icon"
+					href="/icon-light.svg"
+					media="(prefers-color-scheme: no-preference)"
+				/>
+				<link
+					rel="icon"
+					href="/icon-dark.svg"
+					media="(prefers-color-scheme: dark)"
+				/>
+				<link
+					rel="icon"
+					href="/icon-light.svg"
+					media="(prefers-color-scheme: light)"
+				/>
 			</Head>
 
 			<h1 className="mb-2 text-5xl font-extrabold tracking-tight">Olek</h1>
