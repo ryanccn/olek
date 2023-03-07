@@ -19,9 +19,9 @@ const Card = ({
 }) => {
 	return (
 		<li>
-			<div className="flex flex-col items-start rounded-lg bg-neutral-50 p-8 dark:bg-neutral-900">
+			<div className="flex flex-col items-start rounded-lg bg-neutral-50 p-8 dark:bg-neutral-800">
 				<h2 className="mb-8 flex flex-wrap items-center gap-4">
-					<span className="text-3xl font-bold tracking-tight">
+					<span className="text-2xl font-bold tracking-tight">
 						{data.config.name}
 					</span>
 
@@ -45,10 +45,9 @@ const Card = ({
 
 				{data.data.uptime && (
 					<>
-						<p className="mb-3 text-2xl font-bold">
+						<p className="mb-4 text-xl font-bold">
 							{((data.data.uptime.up / data.data.uptime.all) * 100).toFixed(2)}%
 						</p>
-
 						<ol className="grid h-10 w-full grid-cols-[repeat(30,_minmax(0,_1fr))] gap-0.5">
 							{[...data.data.uptime.history].reverse().map((check, idx) => (
 								<Tooltip.Root delayDuration={250} key={idx}>
@@ -73,7 +72,7 @@ const Card = ({
 									</Tooltip.Trigger>
 									<Tooltip.Portal>
 										<Tooltip.Content
-											className="select-none rounded bg-neutral-100 px-2 py-1 text-xs font-medium shadow-sm data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade dark:bg-neutral-800"
+											className="select-none rounded bg-neutral-100 px-2 py-1 text-xs font-medium shadow-sm data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade dark:bg-neutral-700"
 											sideOffset={5}
 										>
 											{check > 0
@@ -81,7 +80,7 @@ const Card = ({
 												: check === 0
 												? 'Down'
 												: 'Unavailable'}
-											<Tooltip.Arrow className="fill-neutral-100 dark:fill-neutral-800" />
+											<Tooltip.Arrow className="fill-neutral-100 dark:fill-neutral-700" />
 										</Tooltip.Content>
 									</Tooltip.Portal>
 								</Tooltip.Root>
