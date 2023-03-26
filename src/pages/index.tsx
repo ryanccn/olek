@@ -20,16 +20,13 @@ interface Props {
 
 const Index: NextPage<Props> = ({ data }) => {
 	const everythingGood = useMemo(() => {
-		let ret = true;
-
 		for (const website of data) {
 			if (website.data.uptime && website.data.uptime.history[0] === 0) {
-				ret = false;
-				break;
+				return false;
 			}
 		}
 
-		return ret;
+		return true;
 	}, [data]);
 
 	return (
