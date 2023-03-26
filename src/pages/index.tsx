@@ -48,6 +48,36 @@ const Index: NextPage<Props> = ({ data }) => {
 					href="/icon-light.svg"
 					media="(prefers-color-scheme: light)"
 				/>
+				<meta
+					name="description"
+					content="Status page for Ryan's websites and services"
+				/>
+				<meta property="og:type" content="website" />
+				<meta property="og:title" content="Olek" />
+				<meta
+					property="og:description"
+					content="Status page for Ryan's websites and services"
+				/>
+				<meta property="og:url" content="https://status.ryanccn.dev/" />
+				<meta
+					property="og:image"
+					content={`https://status.ryanccn.dev/cover-${
+						everythingGood ? 'good' : 'bad'
+					}.png`}
+				/>
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:site" content="@RyanCaoDev" />
+				<meta name="twitter:title" content="Olek" />
+				<meta
+					name="twitter:description"
+					content="Status page for Ryan's websites and services"
+				/>
+				<meta
+					name="twitter:image"
+					content={`https://status.ryanccn.dev/cover-${
+						everythingGood ? 'good' : 'bad'
+					}.png`}
+				/>
 			</Head>
 
 			<h1 className="mb-2 text-5xl font-extrabold tracking-tight">Olek</h1>
