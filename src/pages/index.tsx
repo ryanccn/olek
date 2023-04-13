@@ -20,16 +20,13 @@ interface Props {
 
 const Index: NextPage<Props> = ({ data }) => {
 	const everythingGood = useMemo(() => {
-		let ret = true;
-
 		for (const website of data) {
 			if (website.data.uptime && website.data.uptime.history[0] === 0) {
-				ret = false;
-				break;
+				return false;
 			}
 		}
 
-		return ret;
+		return true;
 	}, [data]);
 
 	return (
@@ -50,6 +47,36 @@ const Index: NextPage<Props> = ({ data }) => {
 					rel="icon"
 					href="/icon-light.svg"
 					media="(prefers-color-scheme: light)"
+				/>
+				<meta
+					name="description"
+					content="Status page for Ryan's websites and services"
+				/>
+				<meta property="og:type" content="website" />
+				<meta property="og:title" content="Olek" />
+				<meta
+					property="og:description"
+					content="Status page for Ryan's websites and services"
+				/>
+				<meta property="og:url" content="https://status.ryanccn.dev/" />
+				<meta
+					property="og:image"
+					content={`https://status.ryanccn.dev/cover-${
+						everythingGood ? 'good' : 'bad'
+					}.png`}
+				/>
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:site" content="@RyanCaoDev" />
+				<meta name="twitter:title" content="Olek" />
+				<meta
+					name="twitter:description"
+					content="Status page for Ryan's websites and services"
+				/>
+				<meta
+					name="twitter:image"
+					content={`https://status.ryanccn.dev/cover-${
+						everythingGood ? 'good' : 'bad'
+					}.png`}
 				/>
 			</Head>
 
