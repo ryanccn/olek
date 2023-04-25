@@ -14,4 +14,9 @@ export default defineConfig([
 		url: 'https://blahaj.ryanccn.dev/health',
 		lighthouse: { enabled: false },
 	},
+	{
+		name: 'Mojang Authserver',
+		url: 'https://authserver.mojang.com/',
+		lighthouse: { enabled: false },
+	},
 ]);
