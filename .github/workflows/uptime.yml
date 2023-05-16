@@ -19,11 +19,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 19
+      - uses: pnpm/action-setup@v2
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install
       - name: Update uptime
-        run: yarn run update:uptime
+        run: pnpm run update:uptime
         env:
           NODE_ENV: production
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

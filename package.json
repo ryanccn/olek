@@ -1,7 +1,6 @@
 {
 	"name": "olek",
 	"version": "0.0.1",
-	"type": "module",
 	"license": "MIT",
 	"scripts": {
 		"dev": "next dev",
@@ -41,5 +40,6 @@
 		"tailwindcss": "^3.2.7",
 		"tsx": "^3.12.3",
 		"typescript": "^4.9.5"
-	}
+	},
+	"packageManager": "pnpm@8.5.0"
 }

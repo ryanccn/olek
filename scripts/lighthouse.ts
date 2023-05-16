@@ -11,13 +11,14 @@ import config from '@config';
 
 	for (const website of config) {
 		if (website.lighthouse?.enabled === false) continue;
+		if (!website.url) continue;
 
 		const results = await lighthouse(website.url, undefined, undefined, page);
 		if (!results) throw new Error('No results returned!');
 
 		const scores = results.lhr.categories;
 
-		let websiteData = await readData(website);
+		const websiteData = await readData(website);
 
 		websiteData.lighthouse = {};
 
