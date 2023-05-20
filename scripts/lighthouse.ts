@@ -1,19 +1,24 @@
-import { launch } from 'puppeteer';
-import lighthouse from 'lighthouse';
+import lighthouse, { type Flags } from 'lighthouse';
+import chromeLauncher from 'chrome-launcher';
 
 import { readData, writeData } from '~/lib/data';
 
 import config from '@config';
 
 (async () => {
-	const browser = await launch({ headless: true });
-	const page = await browser.newPage();
+	const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless'] });
+	const lighthouseOptions = {
+		logLevel: 'info',
+		output: 'html',
+		onlyCategories: ['performance'],
+		port: chrome.port,
+	} satisfies Flags;
 
 	for (const website of config) {
 		if (website.lighthouse?.enabled === false) continue;
 		if (!website.url) continue;
 
-		const results = await lighthouse(website.url, undefined, undefined, page);
+		const results = await lighthouse(website.url, lighthouseOptions);
 		if (!results) throw new Error('No results returned!');
 
 		const scores = results.lhr.categories;
@@ -39,7 +44,7 @@ import config from '@config';
 		await writeData(website, websiteData);
 	}
 
-	await browser.close();
+	chrome.kill();
 })().catch((err) => {
 	console.error(err);
 	process.exit(1);
