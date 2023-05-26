@@ -1,11 +1,11 @@
 import { readData, writeData } from '~/lib/data';
+import { ping } from '@ryanccn/tcp-ping';
 import { isSameDay } from 'date-fns';
+
 import config from '@config';
 
 (async () => {
 	for (const website of config) {
-		const tA = performance.now();
-
 		let websiteIsUp = false;
 		try {
 			const response = await fetch(website.url, {
@@ -16,8 +16,6 @@ import config from '@config';
 		} catch {
 			websiteIsUp = false;
 		}
-
-		const tB = performance.now();
 
 		const websiteData = await readData(website);
 
@@ -32,11 +30,18 @@ import config from '@config';
 			!websiteData.uptime.lastChecked ||
 			!isSameDay(new Date(), new Date(websiteData.uptime.lastChecked));
 
-		if (websiteIsUp) {
-			if (shouldPushNewEntry) websiteData.uptime.history.unshift(tB - tA);
-			else
+		const pingResponse = await ping({
+			host: new URL(website.url).hostname,
+			port: 80,
+		});
+
+		if (websiteIsUp && pingResponse.ok) {
+			if (shouldPushNewEntry) {
+				websiteData.uptime.history.unshift(pingResponse.latency);
+			} else {
 				websiteData.uptime.history[0] =
-					(tB - tA + websiteData.uptime.history[0]) / 2;
+					(pingResponse.latency + websiteData.uptime.history[0]) / 2;
+			}
 
 			websiteData.uptime.up += 1;
 		} else {
@@ -47,8 +52,9 @@ import config from '@config';
 		websiteData.uptime.history = websiteData.uptime.history.slice(0, 30);
 		websiteData.uptime.all += 1;
 
-		if (shouldPushNewEntry)
+		if (shouldPushNewEntry) {
 			websiteData.uptime.lastChecked = new Date().toDateString();
+		}
 
 		console.log(
 			`${website.name} (${website.url}) is up: ${websiteIsUp}, should push new entry: ${shouldPushNewEntry}`
