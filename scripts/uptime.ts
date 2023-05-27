@@ -57,7 +57,7 @@ import { isSameDay } from 'date-fns';
 		}
 
 		console.log(
-			`${website.name} (${website.url}) is up: ${websiteIsUp}, should push new entry: ${shouldPushNewEntry}`
+			`${website.name} is up: ${websiteIsUp}, should push new entry: ${shouldPushNewEntry}`
 		);
 
 		await writeData(website, websiteData);
