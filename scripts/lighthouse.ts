@@ -2,8 +2,7 @@ import lighthouse, { type Flags } from 'lighthouse';
 import chromeLauncher from 'chrome-launcher';
 
 import { readData, writeData } from '~/lib/data';
-
-import config from '@config';
+import { config } from '~/lib/config';
 
 (async () => {
 	const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless'] });
@@ -15,7 +14,7 @@ import config from '@config';
 	} satisfies Flags;
 
 	for (const website of config) {
-		if (website.lighthouse?.enabled === false) continue;
+		if (website.lighthouse?.enabled !== true) continue;
 		if (!website.url) continue;
 
 		const results = await lighthouse(website.url, lighthouseOptions);

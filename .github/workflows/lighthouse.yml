@@ -28,3 +28,4 @@ jobs:
         env:
           NODE_ENV: production
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          OLEK_CONFIG: ${{ secrets.OLEK_CONFIG }}

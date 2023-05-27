@@ -7,7 +7,7 @@ import Card from '~/components/Card';
 import Head from 'next/head';
 import { CheckCheck, XCircle } from 'lucide-react';
 
-import config from '@config';
+import { config } from '~/lib/config';
 import { readData } from '~/lib/data';
 import pLimit from 'p-limit';
 

@@ -1,8 +1,8 @@
 import { readData, writeData } from '~/lib/data';
+import { config } from '~/lib/config';
+
 import { ping } from '@ryanccn/tcp-ping';
 import { isSameDay } from 'date-fns';
-
-import config from '@config';
 
 (async () => {
 	for (const website of config) {

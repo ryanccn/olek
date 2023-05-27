@@ -8,7 +8,8 @@
 		"start": "next start",
 		"lint": "next lint",
 		"update:lighthouse": "tsx scripts/lighthouse.ts",
-		"update:uptime": "tsx scripts/uptime.ts"
+		"update:uptime": "tsx scripts/uptime.ts",
+		"generate-config": "tsx scripts/generateConfig.ts"
 	},
 	"dependencies": {
 		"clsx": "^1.2.1",
