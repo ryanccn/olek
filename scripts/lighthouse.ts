@@ -7,9 +7,9 @@ import { config } from '~/lib/config';
 (async () => {
 	const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless'] });
 	const lighthouseOptions = {
-		logLevel: 'info',
+		logLevel: 'error',
 		output: 'html',
-		onlyCategories: ['performance'],
+		onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'],
 		port: chrome.port,
 	} satisfies Flags;
 
