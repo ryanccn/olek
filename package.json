@@ -1,6 +1,7 @@
 {
 	"name": "olek",
 	"version": "0.0.1",
+	"type": "module",
 	"license": "AGPL-3.0-or-later",
 	"scripts": {
 		"dev": "next dev",
@@ -8,8 +9,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"update:lighthouse": "tsx scripts/lighthouse.ts",
-		"update:uptime": "tsx scripts/uptime.ts",
-		"generate-config": "tsx scripts/generateConfig.ts"
+		"update:uptime": "tsx scripts/uptime.ts"
 	},
 	"dependencies": {
 		"clsx": "^1.2.1",

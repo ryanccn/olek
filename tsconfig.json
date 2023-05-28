@@ -19,6 +19,6 @@
 			"~/*": ["src/*"]
 		}
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "scripts/lighthouse.ts"],
 	"exclude": ["node_modules"]
 }

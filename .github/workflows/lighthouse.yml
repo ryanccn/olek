@@ -5,21 +5,21 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 19
-      - uses: pnpm/action-setup@v2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
 
       - name: Install dependencies
         run: pnpm install
@@ -27,5 +27,6 @@ jobs:
         run: pnpm run update:lighthouse
         env:
           NODE_ENV: production
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           OLEK_CONFIG: ${{ secrets.OLEK_CONFIG }}

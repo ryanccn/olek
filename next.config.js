@@ -1,4 +1,6 @@
+/* eslint-disable import/no-anonymous-default-export */
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+export default {
 	reactStrictMode: true,
 };
