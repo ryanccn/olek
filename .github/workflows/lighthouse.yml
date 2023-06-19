@@ -2,7 +2,7 @@ name: Update Lighthouse data
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
@@ -14,15 +14,15 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 19
+          node-version: 20
       - name: Install pnpm
         uses: pnpm/action-setup@v2
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
         id: setup-chrome
-
       - name: Install dependencies
         run: pnpm install
+
       - name: Update Lighthouse
         run: pnpm run update:lighthouse
         env:
