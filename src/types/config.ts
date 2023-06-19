@@ -3,6 +3,7 @@ import { z } from 'zod';
 export const ConfigWebsite = z.object({
 	name: z.string(),
 	url: z.string().url(),
+	public: z.boolean().optional(),
 	uptime: z.object({ method: z.string() }).partial().optional(),
 	lighthouse: z.object({ enabled: z.boolean() }).partial().optional(),
 });

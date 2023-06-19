@@ -1,6 +1,8 @@
 import type { WebsiteData } from '~/types/data';
 import type { ConfigWebsite } from '~/types/config';
 
+import { Link } from 'lucide-react';
+
 import * as Tooltip from '@radix-ui/react-tooltip';
 
 import clsx from 'clsx';
@@ -21,9 +23,21 @@ const Card = ({
 		<li>
 			<div className="flex flex-col items-start rounded-lg bg-neutral-50 p-8 dark:bg-neutral-800">
 				<h2 className="mb-8 flex flex-wrap items-center gap-4">
-					<span className="text-2xl font-bold tracking-tight">
-						{data.config.name}
-					</span>
+					<div className="flex flex-row gap-2">
+						<span className="text-2xl font-bold tracking-tight">
+							{data.config.name}
+						</span>
+						{data.config.public === true && (
+							<a
+								href={data.config.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="self-center"
+							>
+								<Link className="block h-6 w-6 stroke-[2.5]" />
+							</a>
+						)}
+					</div>
 
 					{data.data.uptime && (
 						<div className="flex items-center gap-x-1">
