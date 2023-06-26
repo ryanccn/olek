@@ -28,13 +28,8 @@ const Card = ({
 							{data.config.name}
 						</span>
 						{data.config.public === true && (
-							<a
-								href={data.config.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="self-center"
-							>
-								<Link className="block h-6 w-6 stroke-[2.5]" />
+							<a href={data.config.url}>
+								<Link className="block h-4 w-4 text-neutral-500 dark:text-neutral-400" />
 							</a>
 						)}
 					</div>
