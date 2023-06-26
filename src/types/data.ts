@@ -6,6 +6,7 @@ export interface WebsiteData {
 		up: number;
 		all: number;
 		lastChecked: string | null;
+		lastCheckStatus?: boolean;
 	};
 	lighthouse?: Record<string, number>;
 }

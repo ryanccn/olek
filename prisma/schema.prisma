@@ -8,10 +8,11 @@ datasource db {
 }
 
 type WebsitesUptime {
-  up          Int
-  all         Int
-  history     Float[]
-  lastChecked String
+  up              Int
+  all             Int
+  history         Float[]
+  lastChecked     String
+  lastCheckStatus Boolean?
 }
 
 type WebsitesLighthouse {
