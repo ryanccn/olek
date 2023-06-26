@@ -23,3 +23,5 @@ jobs:
 
       - name: Lint
         run: pnpm run lint
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
