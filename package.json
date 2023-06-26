@@ -44,5 +44,5 @@
 		"tsx": "^3.12.7",
 		"typescript": "^5.0.4"
 	},
-	"packageManager": "pnpm@8.6.3"
+	"packageManager": "pnpm@8.6.5"
 }
