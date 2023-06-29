@@ -23,7 +23,7 @@ const Card = ({
 		<li>
 			<div className="flex flex-col items-start rounded-lg bg-neutral-50 p-8 dark:bg-neutral-800">
 				<h2 className="mb-8 flex flex-wrap items-center gap-4">
-					<div className="flex flex-row gap-2">
+					<div className="flex flex-row gap-2 items-center">
 						<span className="text-2xl font-bold tracking-tight">
 							{data.config.name}
 						</span>
