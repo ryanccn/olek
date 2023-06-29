@@ -5,8 +5,11 @@ import { ping } from '@ryanccn/tcp-ping';
 import { isSameDay } from 'date-fns';
 
 import { RESTPostAPIWebhookWithTokenJSONBody as DiscordWebhookData } from 'discord-api-types/rest/v10/webhook';
+import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 
 (async () => {
+	let embeds: Embed[] = [];
+
 	for (const website of config) {
 		let websiteIsUp = false;
 		try {
@@ -56,30 +59,13 @@ import { RESTPostAPIWebhookWithTokenJSONBody as DiscordWebhookData } from 'disco
 				process.env.DISCORD_WEBHOOK_URL &&
 				websiteData.uptime.lastCheckStatus === true
 			) {
-				const data = {
-					embeds: [
-						{
-							title: `${websiteData.name} is down!`,
-							description:
-								'The website / health check endpoint is unreachable from Olek.',
-							timestamp: new Date().toISOString(),
-							color: 0xef4444,
-						},
-					],
-				} as DiscordWebhookData;
-
-				if (process.env.DISCORD_WEBHOOK_CONTENT)
-					data.content = process.env.DISCORD_WEBHOOK_CONTENT;
-
-				const discordRes = await fetch(process.env.DISCORD_WEBHOOK_URL, {
-					method: 'POST',
-					body: JSON.stringify(data),
-					headers: { 'Content-Type': 'application/json' },
+				embeds.push({
+					title: `${websiteData.name} is down!`,
+					description:
+						'The website / health check endpoint is unreachable from Olek.',
+					timestamp: new Date().toISOString(),
+					color: 0xef4444,
 				});
-
-				if (!discordRes.ok) {
-					console.warn(`Failed to post to Discord webhook`);
-				}
 			}
 		}
 
@@ -92,6 +78,24 @@ import { RESTPostAPIWebhookWithTokenJSONBody as DiscordWebhookData } from 'disco
 		}
 
 		await writeData(website, websiteData);
+	}
+
+	if (embeds.length > 0) {
+		const data = { embeds } as DiscordWebhookData;
+
+		if (process.env.DISCORD_WEBHOOK_CONTENT) {
+			data.content = process.env.DISCORD_WEBHOOK_CONTENT;
+		}
+
+		const discordRes = await fetch(process.env.DISCORD_WEBHOOK_URL, {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: { 'Content-Type': 'application/json' },
+		});
+
+		if (!discordRes.ok) {
+			console.warn(`Failed to post to Discord webhook`);
+		}
 	}
 })().catch((err) => {
 	console.error(err);
