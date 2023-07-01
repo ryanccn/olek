@@ -8,7 +8,7 @@ import { RESTPostAPIWebhookWithTokenJSONBody as DiscordWebhookData } from 'disco
 import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 
 (async () => {
-	let embeds: Embed[] = [];
+	const embeds: Embed[] = [];
 
 	for (const website of config) {
 		let websiteIsUp = false;
@@ -51,6 +51,19 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 			}
 
 			websiteData.uptime.up += 1;
+
+			if (
+				process.env.DISCORD_WEBHOOK_URL &&
+				websiteData.uptime.lastCheckStatus === false
+			) {
+				embeds.push({
+					title: `${websiteData.name} is back up!`,
+					description:
+						'The website / health check endpoint is reachable again.',
+					timestamp: new Date().toISOString(),
+					color: 0x4ade80,
+				});
+			}
 		} else {
 			if (shouldPushNewEntry) websiteData.uptime.history.unshift(0);
 			else websiteData.uptime.history[0] = 0;
