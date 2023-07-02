@@ -9,7 +9,8 @@
 		"start": "next start",
 		"lint": "next lint",
 		"update:lighthouse": "tsx scripts/lighthouse.ts",
-		"update:uptime": "tsx scripts/uptime.ts"
+		"update:uptime": "tsx scripts/uptime.ts",
+		"postinstall": "prisma generate"
 	},
 	"dependencies": {
 		"@radix-ui/react-tooltip": "^1.0.6",
