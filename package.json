@@ -37,7 +37,7 @@
 		"discord-api-types": "^0.37.46",
 		"eslint": "^8.41.0",
 		"eslint-config-next": "^13.4.4",
-		"lighthouse": "^10.2.0",
+		"lighthouse": "^10.3.0",
 		"postcss": "^8.4.23",
 		"prettier": "^2.8.8",
 		"prettier-plugin-tailwindcss": "^0.3.0",
