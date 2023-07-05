@@ -34,7 +34,7 @@
 		"chrome-launcher": "^0.15.2",
 		"date-fns": "^2.30.0",
 		"discord-api-types": "^0.37.46",
-		"eslint": "^8.41.0",
+		"eslint": "^8.44.0",
 		"eslint-config-next": "^13.4.4",
 		"lighthouse": "^10.2.0",
 		"postcss": "^8.4.23",
