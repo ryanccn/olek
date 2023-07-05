@@ -1,7 +1,6 @@
 import { readData, writeData } from '~/lib/data';
 import { config } from '~/lib/config';
 
-import { ping } from '@ryanccn/tcp-ping';
 import { isSameDay } from 'date-fns';
 
 import { RESTPostAPIWebhookWithTokenJSONBody as DiscordWebhookData } from 'discord-api-types/rest/v10/webhook';
@@ -12,10 +11,15 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 
 	for (const website of config) {
 		let websiteIsUp = false;
+		let responseTime = -1;
+
 		try {
+			const a = performance.now();
 			const response = await fetch(website.url, {
 				method: website.uptime?.method ?? 'HEAD',
 			});
+			const b = performance.now();
+			responseTime = b - a;
 
 			websiteIsUp = response.ok;
 		} catch {
@@ -35,19 +39,12 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 			!websiteData.uptime.lastChecked ||
 			!isSameDay(new Date(), new Date(websiteData.uptime.lastChecked));
 
-		const pingResponse = await ping({
-			host: new URL(website.url).hostname,
-			port: 80,
-		});
-
-		websiteIsUp &&= pingResponse.ok;
-
-		if (websiteIsUp && pingResponse.ok) {
+		if (websiteIsUp) {
 			if (shouldPushNewEntry) {
-				websiteData.uptime.history.unshift(pingResponse.latency);
+				websiteData.uptime.history.unshift(responseTime);
 			} else {
 				websiteData.uptime.history[0] =
-					(pingResponse.latency + websiteData.uptime.history[0]) / 2;
+					(responseTime + websiteData.uptime.history[0]) / 2;
 			}
 
 			websiteData.uptime.up += 1;

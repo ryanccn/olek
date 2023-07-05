@@ -37,9 +37,6 @@ devDependencies:
   '@prisma/client':
     specifier: ^4.14.1
     version: 4.14.1(prisma@4.14.1)
-  '@ryanccn/tcp-ping':
-    specifier: ^0.1.1
-    version: 0.1.1
   '@sindresorhus/slugify':
     specifier: ^2.2.1
     version: 2.2.1
@@ -970,10 +967,6 @@ packages:
 
   /@rushstack/eslint-patch@1.3.0:
     resolution: {integrity: sha512-IthPJsJR85GhOkp3Hvp8zFOPK5ynKn6STyHa/WZpioK7E1aYDiBzpqQPrngc14DszIUkIrdd3k9Iu0XSzlP/1w==}
-    dev: true
-
-  /@ryanccn/tcp-ping@0.1.1:
-    resolution: {integrity: sha512-f6K69Ht5KNE4Blmzx6g07/N/Y9A3hC/cd99w75R8FqE4Qa2TeoXkfdGd+i4VdRwcvRDu1WQmAh4ub/W1VaT5gw==}
     dev: true
 
   /@sentry/core@6.19.7:
