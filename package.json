@@ -37,7 +37,7 @@
 		"eslint": "^8.45.0",
 		"eslint-config-next": "^13.4.11",
 		"lighthouse": "^10.4.0",
-		"postcss": "^8.4.26",
+		"postcss": "^8.4.27",
 		"prettier": "^2.8.8",
 		"prettier-plugin-tailwindcss": "^0.3.0",
 		"prisma": "^5.0.0",
