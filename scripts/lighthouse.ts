@@ -1,11 +1,11 @@
 import lighthouse, { type Flags } from 'lighthouse';
-import chromeLauncher from 'chrome-launcher';
+import { launch } from 'chrome-launcher';
 
 import { readData, writeData } from '~/lib/data';
 import { config } from '~/lib/config';
 
 (async () => {
-	const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless'] });
+	const chrome = await launch({ chromeFlags: ['--headless'] });
 	const lighthouseOptions = {
 		logLevel: 'error',
 		output: 'html',
