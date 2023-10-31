@@ -5,7 +5,7 @@ import { Link } from 'lucide-react';
 
 import * as Tooltip from '@radix-ui/react-tooltip';
 
-import clsx from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 const readableLighthouseTitle = {
 	performance: 'Performance',
@@ -37,7 +37,7 @@ const Card = ({
 					{data.data.uptime && (
 						<div className="flex items-center gap-x-1">
 							<span
-								className={clsx([
+								className={twMerge([
 									'block h-2 w-2 rounded-full',
 									data.data.uptime.history[0] ? 'bg-green-400' : 'bg-red-400',
 								])}
@@ -62,7 +62,7 @@ const Card = ({
 								<Tooltip.Root delayDuration={250} key={idx}>
 									<Tooltip.Trigger asChild>
 										<li
-											className={clsx([
+											className={twMerge([
 												'h-full w-full bg-green-400',
 												idx === 0 ? 'rounded-l' : null,
 												idx === data.data.uptime.history.length - 1

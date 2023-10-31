@@ -1,7 +1,7 @@
 import type { NextPage, GetStaticProps } from 'next';
 
 import { useMemo } from 'react';
-import clsx from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 import Card from '~/components/Card';
 import Head from 'next/head';
@@ -86,9 +86,9 @@ const Index: NextPage<Props> = ({ data }) => {
 			</h2>
 
 			<div
-				className={clsx(
+				className={twMerge(
 					'mb-10 flex flex-col items-center justify-center gap-4 rounded-lg px-4 py-12 text-center text-2xl font-bold text-white lg:flex-row',
-					everythingGood ? 'bg-green-500' : 'bg-red-500'
+					everythingGood ? 'bg-green-500' : 'bg-red-500',
 				)}
 			>
 				{everythingGood ? (
@@ -115,7 +115,9 @@ const Index: NextPage<Props> = ({ data }) => {
 export const getStaticProps: GetStaticProps<Props> = async () => {
 	const lim = pLimit(10);
 	const data = await Promise.all(
-		config.map((w) => lim(async () => ({ config: w, data: await readData(w) })))
+		config.map((w) =>
+			lim(async () => ({ config: w, data: await readData(w) })),
+		),
 	);
 
 	return { props: { data }, revalidate: 60 };
