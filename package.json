@@ -16,7 +16,7 @@
 		"@radix-ui/react-tooltip": "^1.0.7",
 		"lucide-react": "^0.291.0",
 		"next": "^14.0.1",
-		"p-limit": "^4.0.0",
+		"p-limit": "^5.0.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"tailwind-merge": "^2.0.0",
