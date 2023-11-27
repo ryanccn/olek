@@ -28,7 +28,7 @@
 		"@sindresorhus/slugify": "^2.2.1",
 		"@types/node": "^20.9.0",
 		"@types/react": "18.2.37",
-		"@typescript-eslint/eslint-plugin": "^6.10.0",
+		"@typescript-eslint/eslint-plugin": "^6.13.0",
 		"@typescript-eslint/parser": "^6.10.0",
 		"autoprefixer": "^10.4.16",
 		"chrome-launcher": "^1.1.0",
