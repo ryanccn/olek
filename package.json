@@ -24,7 +24,7 @@
 	},
 	"devDependencies": {
 		"@microsoft/eslint-formatter-sarif": "^3.0.0",
-		"@prisma/client": "^5.7.0",
+		"@prisma/client": "^5.7.1",
 		"@sindresorhus/slugify": "^2.2.1",
 		"@types/node": "^20.10.4",
 		"@types/react": "18.2.45",
