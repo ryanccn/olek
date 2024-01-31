@@ -4,6 +4,9 @@ import { launch } from 'chrome-launcher';
 import { readData, writeData } from '~/lib/data';
 import { config } from '~/lib/config';
 
+const safeObjectKeys = <T extends object>(obj: T): (keyof T)[] =>
+	Object.keys(obj) as (keyof T)[];
+
 (async () => {
 	const chrome = await launch({ chromeFlags: ['--headless'] });
 	const lighthouseOptions = {
@@ -31,9 +34,9 @@ import { config } from '~/lib/config';
 			accessibility: 'accessibility',
 			'best-practices': 'bestPractices',
 			seo: 'seo',
-		};
+		} as const;
 
-		for (const key of Object.keys(reportCategories)) {
+		for (const key of safeObjectKeys(reportCategories)) {
 			const score = scores[key];
 			if (!score || !score.title || !score.score) continue;
 

@@ -27,12 +27,14 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 		}
 
 		const websiteData = await readData(website);
+		if (!websiteData) throw new Error(`Could not fetch data for ${website}`);
 
-		websiteData.uptime = websiteData.uptime || {
+		websiteData.uptime = websiteData.uptime ?? {
 			history: new Array(30).fill(-1),
 			up: 0,
 			all: 0,
 			lastChecked: null,
+			lastCheckStatus: null,
 		};
 
 		const shouldPushNewEntry =
@@ -49,10 +51,7 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 
 			websiteData.uptime.up += 1;
 
-			if (
-				process.env.DISCORD_WEBHOOK_URL &&
-				websiteData.uptime.lastCheckStatus === false
-			) {
+			if (websiteData.uptime.lastCheckStatus === false) {
 				embeds.push({
 					title: `${websiteData.name} is back up!`,
 					description:
@@ -65,10 +64,7 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 			if (shouldPushNewEntry) websiteData.uptime.history.unshift(0);
 			else websiteData.uptime.history[0] = 0;
 
-			if (
-				process.env.DISCORD_WEBHOOK_URL &&
-				websiteData.uptime.lastCheckStatus === true
-			) {
+			if (websiteData.uptime.lastCheckStatus === true) {
 				embeds.push({
 					title: `${websiteData.name} is down!`,
 					description:
@@ -90,7 +86,7 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 		await writeData(website, websiteData);
 	}
 
-	if (embeds.length > 0) {
+	if (process.env.DISCORD_WEBHOOK_URL && embeds.length > 0) {
 		const data = { embeds } as DiscordWebhookData;
 
 		if (process.env.DISCORD_WEBHOOK_CONTENT) {
