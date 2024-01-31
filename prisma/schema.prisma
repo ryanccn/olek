@@ -11,7 +11,7 @@ type WebsitesUptime {
   up              Int
   all             Int
   history         Float[]
-  lastChecked     String
+  lastChecked     String?
   lastCheckStatus Boolean?
 }
 

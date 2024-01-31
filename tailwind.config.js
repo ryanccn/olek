@@ -1,8 +1,14 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const config = {
 	content: ['src/**/*.{html,js,jsx,ts,tsx}'],
 	theme: {
 		extend: {
+			fontFamily: {
+				sans: ['var(--font-space-grotesk)', ...defaultTheme.fontFamily.sans],
+			},
+
 			keyframes: {
 				slideDownAndFade: {
 					from: { opacity: 0, transform: 'translateY(-2px)' },
@@ -35,3 +41,5 @@ module.exports = {
 	},
 	plugins: [],
 };
+
+export default config;

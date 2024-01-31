@@ -14,8 +14,14 @@ export const readData = async (website: ConfigWebsite) => {
 			where: { url: website.url },
 		});
 	} catch (e) {
-		if (e.code === 'P2025') {
-			websiteData = { name: website.name, url: website.url };
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		if ((e as any).code === 'P2025') {
+			websiteData = {
+				name: website.name,
+				url: website.url,
+				lighthouse: null,
+				uptime: null,
+			};
 		} else {
 			throw e;
 		}
@@ -35,7 +41,7 @@ export const writeData = async (website: ConfigWebsite, data: WebsiteData) => {
 			data: {
 				name: data.name,
 				url: data.url,
-				uptime: data.uptime ?? null,
+				uptime: data.uptime ?? undefined,
 				lighthouse: data.lighthouse ?? null,
 			},
 		});

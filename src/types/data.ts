@@ -1,12 +1,12 @@
 export interface WebsiteData {
 	name: string;
 	url: string;
-	uptime?: {
+	uptime: {
 		history: number[];
 		up: number;
 		all: number;
 		lastChecked: string | null;
-		lastCheckStatus?: boolean;
-	};
-	lighthouse?: Record<string, number>;
+		lastCheckStatus: boolean | null;
+	} | null;
+	lighthouse: Record<string, number> | null;
 }
