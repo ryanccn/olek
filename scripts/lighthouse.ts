@@ -27,20 +27,18 @@ const safeObjectKeys = <T extends object>(obj: T): (keyof T)[] =>
 
 		const websiteData = await readData(website);
 
-		websiteData.lighthouse = {};
-
 		const reportCategories = {
-			performance: 'performance',
-			accessibility: 'accessibility',
-			'best-practices': 'bestPractices',
-			seo: 'seo',
+			'performance': 'lighthousePerformance',
+			'accessibility': 'lighthouseAccessibility',
+			'best-practices': 'lighthouseBestPractices',
+			'seo': 'lighthouseSeo',
 		} as const;
 
 		for (const key of safeObjectKeys(reportCategories)) {
 			const score = scores[key];
 			if (!score || !score.title || !score.score) continue;
 
-			websiteData.lighthouse[reportCategories[key]] = score.score;
+			websiteData[reportCategories[key]] = score.score;
 		}
 
 		await writeData(website, websiteData);

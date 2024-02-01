@@ -34,15 +34,8 @@ const fetchData = unstable_cache(
 );
 
 const isEverythingGood = (data: DataType) => {
-	for (const website of data) {
-		if (
-			website &&
-			website.data.uptime &&
-			website.data.uptime.history[0] === 0
-		) {
-			return false;
-		}
-	}
+	for (const website of data)
+		if (website.data.lastCheckedStatus === false) return false;
 
 	return true;
 };
@@ -53,14 +46,20 @@ const Index = async () => {
 
 	return (
 		<>
-			<h1 className="mb-2 text-5xl font-extrabold tracking-tight">Olek</h1>
-			<h2 className="mb-12 text-xl font-medium text-neutral-500 dark:text-neutral-400">
-				Status page for Ryan&apos;s websites and services.
-			</h2>
+			<div className="mb-12 flex flex-col items-center gap-4 md:flex-row md:justify-between">
+				<h1 className="text-2xl font-extrabold">Ryan&apos;s Status</h1>
+
+				<a
+					href="https://ryanccn.dev/"
+					className="text-sm font-medium tracking-tight underline decoration-dashed underline-offset-4"
+				>
+					ryanccn.dev
+				</a>
+			</div>
 
 			<div
 				className={twMerge(
-					'mb-10 flex flex-col items-center justify-center gap-4 rounded-lg px-4 py-12 text-center text-2xl font-bold text-white lg:flex-row',
+					'mb-10 flex flex-col items-center justify-center gap-4 text-balance rounded-lg px-6 py-16 text-center text-2xl font-bold text-white md:flex-row',
 					everythingGood ? 'bg-green-500' : 'bg-red-500',
 				)}
 			>
@@ -76,7 +75,7 @@ const Index = async () => {
 				</span>
 			</div>
 
-			<ul className="mb-12 flex flex-col gap-y-8">
+			<ul className="flex flex-col gap-y-4">
 				{data.map((website) =>
 					website ? <Card data={website} key={website.config.url} /> : null,
 				)}
@@ -90,7 +89,7 @@ const generateMetadata = async (): Promise<Metadata> => {
 	const everythingGood = isEverythingGood(data);
 
 	return {
-		title: 'Olek',
+		title: "Ryan's Status",
 		description: "Status page for Ryan's websites and services",
 		metadataBase: new URL('https://status.ryanccn.dev/'),
 

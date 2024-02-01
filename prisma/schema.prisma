@@ -3,29 +3,23 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
-type WebsitesUptime {
-  up              Int
-  all             Int
-  history         Float[]
-  lastChecked     String?
-  lastCheckStatus Boolean?
-}
-
-type WebsitesLighthouse {
-  performance   Float
-  accessibility Float
-  bestPractices Float
-  seo           Float
-}
-
 model websites {
-  id         String              @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  url        String              @unique
-  uptime     WebsitesUptime?
-  lighthouse WebsitesLighthouse?
+  url  String @id @unique
+  name String
+
+  uptimeUp      Int
+  uptimeAll     Int
+  uptimeHistory Boolean[]
+
+  lastChecked       DateTime?
+  lastCheckedStatus Boolean?
+
+  lighthousePerformance   Float?
+  lighthouseAccessibility Float?
+  lighthouseBestPractices Float?
+  lighthouseSeo           Float?
 }

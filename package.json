@@ -13,8 +13,7 @@
 		"postinstall": "prisma generate"
 	},
 	"dependencies": {
-		"@radix-ui/react-tooltip": "^1.0.7",
-		"lucide-react": "^0.319.0",
+		"lucide-react": "^0.320.0",
 		"next": "^14.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
@@ -26,8 +25,8 @@
 		"@prisma/client": "^5.9.0",
 		"@sindresorhus/slugify": "^2.2.1",
 		"@total-typescript/ts-reset": "^0.5.1",
-		"@types/node": "^20.11.13",
-		"@types/react": "18.2.48",
+		"@types/node": "^20.11.14",
+		"@types/react": "18.2.50",
 		"@typescript-eslint/eslint-plugin": "^6.20.0",
 		"@typescript-eslint/parser": "^6.20.0",
 		"autoprefixer": "^10.4.17",

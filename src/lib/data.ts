@@ -1,10 +1,7 @@
-import { PrismaClient } from '@prisma/client';
-// import { readFile, writeFile } from 'node:fs/promises';
+import prisma from './prisma';
 
 import type { ConfigWebsite } from '~/types/config';
 import type { WebsiteData } from '~/types/data';
-
-const prisma = new PrismaClient();
 
 export const readData = async (website: ConfigWebsite) => {
 	let websiteData: WebsiteData;
@@ -19,8 +16,15 @@ export const readData = async (website: ConfigWebsite) => {
 			websiteData = {
 				name: website.name,
 				url: website.url,
-				lighthouse: null,
-				uptime: null,
+				uptimeUp: 0,
+				uptimeAll: 0,
+				uptimeHistory: [],
+				lastChecked: null,
+				lastCheckedStatus: null,
+				lighthousePerformance: null,
+				lighthouseAccessibility: null,
+				lighthouseBestPractices: null,
+				lighthouseSeo: null,
 			};
 		} else {
 			throw e;
@@ -36,14 +40,6 @@ export const writeData = async (website: ConfigWebsite, data: WebsiteData) => {
 	});
 
 	if (exists.length > 0)
-		await prisma.websites.update({
-			where: { url: website.url },
-			data: {
-				name: data.name,
-				url: data.url,
-				uptime: data.uptime ?? undefined,
-				lighthouse: data.lighthouse ?? null,
-			},
-		});
+		await prisma.websites.update({ where: { url: website.url }, data });
 	else await prisma.websites.create({ data });
 };

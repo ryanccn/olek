@@ -1,12 +1,16 @@
-export interface WebsiteData {
-	name: string;
+export type WebsiteData = {
 	url: string;
-	uptime: {
-		history: number[];
-		up: number;
-		all: number;
-		lastChecked: string | null;
-		lastCheckStatus: boolean | null;
-	} | null;
-	lighthouse: Record<string, number> | null;
-}
+	name: string;
+
+	uptimeUp: number;
+	uptimeAll: number;
+	uptimeHistory: boolean[];
+
+	lastChecked: Date | null;
+	lastCheckedStatus: boolean | null;
+
+	lighthousePerformance: number | null;
+	lighthouseAccessibility: number | null;
+	lighthouseBestPractices: number | null;
+	lighthouseSeo: number | null;
+};

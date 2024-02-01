@@ -12,6 +12,4 @@ export type ConfigWebsite = z.infer<typeof ConfigWebsite>;
 export const Config = ConfigWebsite.array();
 export type Config = z.infer<typeof Config>;
 
-export const defineConfig = (config: Config) => {
-	return Config.parse(config);
-};
+export const defineConfig = (config: Config) => Config.parse(config);

@@ -1,4 +1,5 @@
 import '~/styles/tailwind.css';
+
 import { Space_Grotesk } from 'next/font/google';
 
 const inter = Space_Grotesk({

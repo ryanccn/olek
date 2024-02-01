@@ -11,15 +11,11 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 
 	for (const website of config) {
 		let websiteIsUp = false;
-		let responseTime = -1;
 
 		try {
-			const a = performance.now();
 			const response = await fetch(website.url, {
 				method: website.uptime?.method ?? 'HEAD',
 			});
-			const b = performance.now();
-			responseTime = b - a;
 
 			websiteIsUp = response.ok;
 		} catch {
@@ -29,29 +25,20 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 		const websiteData = await readData(website);
 		if (!websiteData) throw new Error(`Could not fetch data for ${website}`);
 
-		websiteData.uptime = websiteData.uptime ?? {
-			history: new Array(30).fill(-1),
-			up: 0,
-			all: 0,
-			lastChecked: null,
-			lastCheckStatus: null,
-		};
-
 		const shouldPushNewEntry =
-			!websiteData.uptime.lastChecked ||
-			!isSameDay(new Date(), new Date(websiteData.uptime.lastChecked));
+			!websiteData.lastChecked ||
+			!isSameDay(new Date(), websiteData.lastChecked);
 
 		if (websiteIsUp) {
 			if (shouldPushNewEntry) {
-				websiteData.uptime.history.unshift(responseTime);
+				websiteData.uptimeHistory.unshift(true);
 			} else {
-				websiteData.uptime.history[0] =
-					(responseTime + websiteData.uptime.history[0]) / 2;
+				websiteData.uptimeHistory[0] = true;
 			}
 
-			websiteData.uptime.up += 1;
+			websiteData.uptimeUp += 1;
 
-			if (websiteData.uptime.lastCheckStatus === false) {
+			if (websiteData.lastCheckedStatus === false) {
 				embeds.push({
 					title: `${websiteData.name} is back up!`,
 					description:
@@ -61,10 +48,10 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 				});
 			}
 		} else {
-			if (shouldPushNewEntry) websiteData.uptime.history.unshift(0);
-			else websiteData.uptime.history[0] = 0;
+			if (shouldPushNewEntry) websiteData.uptimeHistory.unshift(false);
+			else websiteData.uptimeHistory[0] = false;
 
-			if (websiteData.uptime.lastCheckStatus === true) {
+			if (websiteData.lastCheckedStatus === true) {
 				embeds.push({
 					title: `${websiteData.name} is down!`,
 					description:
@@ -75,12 +62,12 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 			}
 		}
 
-		websiteData.uptime.history = websiteData.uptime.history.slice(0, 30);
-		websiteData.uptime.all += 1;
-		websiteData.uptime.lastCheckStatus = websiteIsUp;
+		websiteData.uptimeHistory = websiteData.uptimeHistory.slice(0, 30);
+		websiteData.uptimeAll += 1;
+		websiteData.lastCheckedStatus = websiteIsUp;
 
 		if (shouldPushNewEntry) {
-			websiteData.uptime.lastChecked = new Date().toDateString();
+			websiteData.lastChecked = new Date();
 		}
 
 		await writeData(website, websiteData);
