@@ -1,5 +1,5 @@
 import { type Metadata } from 'next';
-import { unstable_cache } from 'next/cache';
+import { cache } from 'react';
 
 import { twMerge } from 'tailwind-merge';
 import { CheckCheck, XCircle } from 'lucide-react';
@@ -14,24 +14,20 @@ import { WebsiteData } from '~/types/data';
 
 type DataType = { config: ConfigWebsite; data: WebsiteData }[];
 
-const fetchData = unstable_cache(
-	async () => {
-		const queue = new PQueue({ concurrency: 10 });
+const fetchData = cache(async () => {
+	const queue = new PQueue({ concurrency: 10 });
 
-		const data = (await Promise.all(
-			config.map((w) =>
-				queue.add(async () => ({
-					config: w,
-					data: await readData(w),
-				})),
-			),
-		)) as DataType;
+	const data = (await Promise.all(
+		config.map((w) =>
+			queue.add(async () => ({
+				config: w,
+				data: await readData(w),
+			})),
+		),
+	)) as DataType;
 
-		return data;
-	},
-	['status-data'],
-	{ revalidate: 60 },
-);
+	return data;
+});
 
 const isEverythingGood = (data: DataType) => {
 	for (const website of data)
@@ -119,6 +115,8 @@ const generateMetadata = async (): Promise<Metadata> => {
 		},
 	};
 };
+
+export const revalidate = 10;
 
 export default Index;
 export { generateMetadata };
