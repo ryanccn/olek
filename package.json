@@ -22,7 +22,7 @@
 	},
 	"devDependencies": {
 		"@microsoft/eslint-formatter-sarif": "^3.0.0",
-		"@prisma/client": "^5.9.0",
+		"@prisma/client": "^5.9.1",
 		"@sindresorhus/slugify": "^2.2.1",
 		"@total-typescript/ts-reset": "^0.5.1",
 		"@types/node": "^20.11.14",
