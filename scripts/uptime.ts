@@ -12,14 +12,17 @@ import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
 	for (const website of config) {
 		let websiteIsUp = false;
 
-		try {
-			const response = await fetch(website.url, {
-				method: website.uptime?.method ?? 'HEAD',
-			});
+		for (let _ = 0; _ < 5; _++) {
+			try {
+				const response = await fetch(website.url, {
+					method: website.uptime?.method ?? 'HEAD',
+				});
 
-			websiteIsUp = response.ok;
-		} catch {
-			websiteIsUp = false;
+				websiteIsUp ||= response.ok;
+				// eslint-disable-next-line no-empty
+			} catch {}
+
+			if (websiteIsUp) break;
 		}
 
 		const websiteData = await readData(website);
