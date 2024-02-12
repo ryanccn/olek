@@ -27,7 +27,7 @@
 		"@total-typescript/ts-reset": "^0.5.1",
 		"@types/node": "^20.11.17",
 		"@types/react": "18.2.55",
-		"@typescript-eslint/eslint-plugin": "^6.21.0",
+		"@typescript-eslint/eslint-plugin": "^7.0.0",
 		"@typescript-eslint/parser": "^6.21.0",
 		"autoprefixer": "^10.4.17",
 		"chrome-launcher": "^1.1.0",
