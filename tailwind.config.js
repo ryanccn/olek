@@ -6,7 +6,7 @@ const config = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['var(--font-space-grotesk)', ...defaultTheme.fontFamily.sans],
+				sans: ['var(--font-space-grotesk, "__invalid_font")', ...defaultTheme.fontFamily.sans],
 			},
 
 			keyframes: {
@@ -29,13 +29,10 @@ const config = {
 			},
 
 			animation: {
-				slideDownAndFade:
-					'slideDownAndFade 350ms cubic-bezier(0.16, 1, 0.3, 1)',
-				slideLeftAndFade:
-					'slideLeftAndFade 350ms cubic-bezier(0.16, 1, 0.3, 1)',
+				slideDownAndFade: 'slideDownAndFade 350ms cubic-bezier(0.16, 1, 0.3, 1)',
+				slideLeftAndFade: 'slideLeftAndFade 350ms cubic-bezier(0.16, 1, 0.3, 1)',
 				slideUpAndFade: 'slideUpAndFade 350ms cubic-bezier(0.16, 1, 0.3, 1)',
-				slideRightAndFade:
-					'slideRightAndFade 350ms cubic-bezier(0.16, 1, 0.3, 1)',
+				slideRightAndFade: 'slideRightAndFade 350ms cubic-bezier(0.16, 1, 0.3, 1)',
 			},
 		},
 	},

@@ -10,9 +10,9 @@ export const readData = async (website: ConfigWebsite) => {
 		websiteData = await prisma.websites.findFirstOrThrow({
 			where: { url: website.url },
 		});
-	} catch (e) {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		if ((e as any).code === 'P2025') {
+	} catch (error) {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+		if ((error as any).code === 'P2025') {
 			websiteData = {
 				name: website.name,
 				url: website.url,
@@ -27,7 +27,7 @@ export const readData = async (website: ConfigWebsite) => {
 				lighthouseSeo: null,
 			};
 		} else {
-			throw e;
+			throw error;
 		}
 	}
 
@@ -39,7 +39,7 @@ export const writeData = async (website: ConfigWebsite, data: WebsiteData) => {
 		where: { url: website.url },
 	});
 
-	if (exists.length > 0)
-		await prisma.websites.update({ where: { url: website.url }, data });
-	else await prisma.websites.create({ data });
+	await (exists.length > 0
+		? prisma.websites.update({ where: { url: website.url }, data })
+		: prisma.websites.create({ data }));
 };

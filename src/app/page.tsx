@@ -30,8 +30,7 @@ const fetchData = cache(async () => {
 });
 
 const isEverythingGood = (data: DataType) => {
-	for (const website of data)
-		if (website.data.lastCheckedStatus === false) return false;
+	for (const website of data) if (website.data.lastCheckedStatus === false) return false;
 
 	return true;
 };
@@ -64,17 +63,11 @@ const Index = async () => {
 				) : (
 					<XCircle className="block h-6 w-6 stroke-[2.5]" />
 				)}
-				<span>
-					{everythingGood
-						? 'All services are online'
-						: 'Some services are down'}
-				</span>
+				<span>{everythingGood ? 'All services are online' : 'Some services are down'}</span>
 			</div>
 
 			<ul className="flex flex-col gap-y-4">
-				{data.map((website) =>
-					website ? <Card data={website} key={website.config.url} /> : null,
-				)}
+				{data.map((website) => (website ? <Card data={website} key={website.config.url} /> : null))}
 			</ul>
 		</>
 	);

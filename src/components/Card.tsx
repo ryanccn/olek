@@ -13,15 +13,11 @@ const readableLighthouseTitle = {
 	seo: 'SEO',
 };
 
-const padArrayStart = <T,>(arr: T[], len: number, fill: T) => {
-	return Array(len).fill(fill).concat(arr).slice(-Math.max(len, arr.length));
+const padArrayStart = <T,>(arr: T[], len: number, fill: T): T[] => {
+	return [...Array.from<T>({ length: len }).fill(fill), ...arr].slice(-Math.max(len, arr.length));
 };
 
-const Card = ({
-	data,
-}: {
-	data: { config: ConfigWebsite; data: WebsiteData };
-}) => {
+const Card = ({ data }: { data: { config: ConfigWebsite; data: WebsiteData } }) => {
 	return (
 		<>
 			<li>
@@ -36,9 +32,7 @@ const Card = ({
 									{data.config.name}
 								</a>
 							) : (
-								<span className="text-xl font-bold tracking-tight">
-									{data.config.name}
-								</span>
+								<span className="text-xl font-bold tracking-tight">{data.config.name}</span>
 							)}
 
 							{data.data.lastCheckedStatus === true ? (
@@ -50,65 +44,43 @@ const Card = ({
 							)}
 						</div>
 
-						<p className="text-base font-semibold">
-							{((data.data.uptimeUp / data.data.uptimeAll) * 100).toFixed(2)}%
-						</p>
+						<p className="text-base font-semibold">{((data.data.uptimeUp / data.data.uptimeAll) * 100).toFixed(2)}%</p>
 					</div>
 
 					<ol className="grid h-10 w-full grid-cols-[repeat(30,_minmax(0,_1fr))] gap-0.5">
-						{padArrayStart(data.data.uptimeHistory.toReversed(), 30, null).map(
-							(check, idx) => (
-								<li
-									className={twMerge([
-										'h-full w-full bg-green-400 first:rounded-l-lg last:rounded-r-lg',
-										check === true
-											? 'bg-green-400'
-											: check === false
-												? 'bg-red-400'
-												: 'bg-neutral-200 dark:bg-neutral-800',
-									])}
-									aria-label={
-										check === true ? 'Up' : check === false ? 'Down' : 'Unknown'
-									}
-									key={idx}
-								/>
-							),
-						)}
+						{padArrayStart(data.data.uptimeHistory.toReversed(), 30, null).map((check, idx) => (
+							<li
+								className={twMerge([
+									'h-full w-full bg-green-400 first:rounded-l-lg last:rounded-r-lg',
+									check === true
+										? 'bg-green-400'
+										: check === false
+											? 'bg-red-400'
+											: 'bg-neutral-200 dark:bg-neutral-800',
+								])}
+								aria-label={check === true ? 'Up' : check === false ? 'Down' : 'Unknown'}
+								key={idx}
+							/>
+						))}
 					</ol>
 
 					{data.config.lighthouse?.enabled === true && (
 						<div className="mt-6 grid grid-cols-2 gap-6 self-stretch lg:grid-cols-4">
 							<div className="flex flex-col">
-								<span className="text-sm font-medium">
-									{readableLighthouseTitle.performance}
-								</span>
-								<span className="text-lg font-bold">
-									{(data.data.lighthousePerformance! * 100).toFixed(0)}
-								</span>
+								<span className="text-sm font-medium">{readableLighthouseTitle.performance}</span>
+								<span className="text-lg font-bold">{(data.data.lighthousePerformance! * 100).toFixed(0)}</span>
 							</div>
 							<div className="flex flex-col">
-								<span className="text-sm font-medium">
-									{readableLighthouseTitle.accessibility}
-								</span>
-								<span className="text-lg font-bold">
-									{(data.data.lighthouseAccessibility! * 100).toFixed(0)}
-								</span>
+								<span className="text-sm font-medium">{readableLighthouseTitle.accessibility}</span>
+								<span className="text-lg font-bold">{(data.data.lighthouseAccessibility! * 100).toFixed(0)}</span>
 							</div>
 							<div className="flex flex-col">
-								<span className="text-sm font-medium">
-									{readableLighthouseTitle.bestPractices}
-								</span>
-								<span className="text-lg font-bold">
-									{(data.data.lighthouseBestPractices! * 100).toFixed(0)}
-								</span>
+								<span className="text-sm font-medium">{readableLighthouseTitle.bestPractices}</span>
+								<span className="text-lg font-bold">{(data.data.lighthouseBestPractices! * 100).toFixed(0)}</span>
 							</div>
 							<div className="flex flex-col">
-								<span className="text-sm font-medium">
-									{readableLighthouseTitle.seo}
-								</span>
-								<span className="text-lg font-bold">
-									{(data.data.lighthouseSeo! * 100).toFixed(0)}
-								</span>
+								<span className="text-sm font-medium">{readableLighthouseTitle.seo}</span>
+								<span className="text-lg font-bold">{(data.data.lighthouseSeo! * 100).toFixed(0)}</span>
 							</div>
 						</div>
 					)}

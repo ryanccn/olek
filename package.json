@@ -7,13 +7,13 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
+		"lint": "eslint .",
 		"update:lighthouse": "tsx scripts/lighthouse.ts",
 		"update:uptime": "tsx scripts/uptime.ts",
 		"postinstall": "prisma generate"
 	},
 	"dependencies": {
-		"lucide-react": "^0.323.0",
+		"lucide-react": "^0.331.0",
 		"next": "^14.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
@@ -23,18 +23,19 @@
 	"devDependencies": {
 		"@microsoft/eslint-formatter-sarif": "^3.0.0",
 		"@prisma/client": "^5.9.1",
+		"@ryanccn/eslint-config": "^0.3.0",
 		"@sindresorhus/slugify": "^2.2.1",
 		"@total-typescript/ts-reset": "^0.5.1",
-		"@types/node": "^20.11.17",
-		"@types/react": "18.2.55",
-		"@typescript-eslint/eslint-plugin": "^6.21.0",
-		"@typescript-eslint/parser": "^6.21.0",
+		"@types/node": "^20.11.19",
+		"@types/react": "18.2.56",
 		"autoprefixer": "^10.4.17",
 		"chrome-launcher": "^1.1.0",
 		"date-fns": "^3.3.1",
-		"discord-api-types": "^0.37.69",
+		"discord-api-types": "^0.37.70",
 		"eslint": "^8.56.0",
 		"eslint-config-next": "^14.1.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-unicorn": "^51.0.1",
 		"lighthouse": "^11.5.0",
 		"p-queue": "^8.0.1",
 		"postcss": "^8.4.35",
@@ -43,7 +44,8 @@
 		"prisma": "^5.9.1",
 		"tailwindcss": "^3.4.1",
 		"tsx": "^4.7.1",
-		"typescript": "^5.3.3"
+		"typescript": "^5.3.3",
+		"typescript-eslint": "^7.0.1"
 	},
-	"packageManager": "pnpm@8.15.1"
+	"packageManager": "pnpm@8.15.3"
 }
