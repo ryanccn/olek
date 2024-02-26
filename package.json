@@ -27,7 +27,7 @@
 		"@sindresorhus/slugify": "^2.2.1",
 		"@total-typescript/ts-reset": "^0.5.1",
 		"@types/node": "^20.11.20",
-		"@types/react": "18.2.58",
+		"@types/react": "18.2.59",
 		"autoprefixer": "^10.4.17",
 		"chrome-launcher": "^1.1.0",
 		"date-fns": "^3.3.1",
