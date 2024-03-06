@@ -13,8 +13,8 @@
 		"postinstall": "prisma generate"
 	},
 	"dependencies": {
-		"lucide-react": "^0.338.0",
-		"next": "^14.1.0",
+		"lucide-react": "^0.344.0",
+		"next": "^14.1.2",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"tailwind-merge": "^2.2.1",
@@ -26,14 +26,14 @@
 		"@ryanccn/eslint-config": "^0.3.0",
 		"@sindresorhus/slugify": "^2.2.1",
 		"@total-typescript/ts-reset": "^0.5.1",
-		"@types/node": "^20.11.20",
-		"@types/react": "18.2.58",
-		"autoprefixer": "^10.4.17",
+		"@types/node": "^20.11.24",
+		"@types/react": "18.2.63",
+		"autoprefixer": "^10.4.18",
 		"chrome-launcher": "^1.1.0",
 		"date-fns": "^3.3.1",
-		"discord-api-types": "^0.37.70",
+		"discord-api-types": "^0.37.71",
 		"eslint": "^8.57.0",
-		"eslint-config-next": "^14.1.0",
+		"eslint-config-next": "^14.1.2",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-unicorn": "^51.0.1",
 		"lighthouse": "^11.6.0",
@@ -45,7 +45,7 @@
 		"tailwindcss": "^3.4.1",
 		"tsx": "^4.7.1",
 		"typescript": "^5.3.3",
-		"typescript-eslint": "^7.0.2"
+		"typescript-eslint": "^7.1.1"
 	},
-	"packageManager": "pnpm@8.15.3+sha256.fc4a49bd609550a41e14d20efbce802a4b892aa4cac877322de2f0924f122991"
+	"packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"
 }
