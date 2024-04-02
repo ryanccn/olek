@@ -8,7 +8,7 @@
 	}
 
 	body {
-		@apply mx-auto flex max-w-[80ch] flex-col px-8 pb-36 pt-16;
+		@apply mx-auto flex max-w-[55rem] flex-col px-8 pb-36 pt-16;
 		@apply bg-white text-neutral-900 dark:bg-neutral-950 dark:text-white;
 	}
 }

@@ -46,7 +46,7 @@ const Index = async () => {
 
 				<a
 					href="https://ryanccn.dev/"
-					className="text-sm font-medium tracking-tight underline decoration-dashed underline-offset-4"
+					className="text-sm font-medium tracking-tight underline decoration-black/50 decoration-dashed underline-offset-4 transition-colors hover:decoration-black/75 dark:decoration-white/50 dark:hover:decoration-white/75"
 				>
 					ryanccn.dev
 				</a>
@@ -54,7 +54,7 @@ const Index = async () => {
 
 			<div
 				className={twMerge(
-					'mb-10 flex flex-col items-center justify-center gap-4 text-balance rounded-lg px-6 py-16 text-center text-2xl font-bold text-white md:flex-row',
+					'mb-10 flex flex-col items-center justify-center gap-4 text-balance rounded-lg px-6 py-20 text-center text-2xl font-bold text-white md:flex-row',
 					everythingGood ? 'bg-green-500' : 'bg-red-500',
 				)}
 			>
@@ -82,20 +82,7 @@ const generateMetadata = async (): Promise<Metadata> => {
 		description: "Status page for Ryan's websites and services",
 		metadataBase: new URL('https://status.ryanccn.dev/'),
 
-		icons: [
-			{
-				url: '/icon-light.svg',
-				media: '(prefers-color-scheme: no-preference)',
-			},
-			{
-				url: '/icon-light.svg',
-				media: '(prefers-color-scheme: light)',
-			},
-			{
-				url: '/icon-dark.svg',
-				media: '(prefers-color-scheme: dark)',
-			},
-		],
+		icons: [{ url: '/icon.svg', type: 'image/svg+xml' }],
 
 		openGraph: {
 			type: 'website',

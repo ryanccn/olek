@@ -3,8 +3,8 @@ import { config } from '~/lib/config';
 
 import { isSameDay } from 'date-fns';
 
-import { RESTPostAPIWebhookWithTokenJSONBody as DiscordWebhookData } from 'discord-api-types/rest/v10/webhook';
-import { APIEmbed as Embed } from 'discord-api-types/payloads/v10/channel';
+import type { RESTPostAPIWebhookWithTokenJSONBody as DiscordWebhookData } from 'discord-api-types/rest';
+import type { APIEmbed as Embed } from 'discord-api-types/payloads';
 
 const embeds: Embed[] = [];
 

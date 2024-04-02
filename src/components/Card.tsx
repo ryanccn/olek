@@ -27,7 +27,7 @@ const Card = ({ data }: { data: { config: ConfigWebsite; data: WebsiteData } }) 
 							{data.config.public === true ? (
 								<a
 									href={data.config.url}
-									className="text-xl font-bold tracking-tight underline decoration-dashed underline-offset-4"
+									className="text-xl font-bold tracking-tight underline decoration-black/50 decoration-dashed underline-offset-4 transition-colors hover:decoration-black/75 dark:decoration-white/50 dark:hover:decoration-white/75"
 								>
 									{data.config.name}
 								</a>
