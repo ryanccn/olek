@@ -71,8 +71,8 @@ devDependencies:
     specifier: ^51.0.1
     version: 51.0.1(eslint@8.57.0)
   lighthouse:
-    specifier: ^11.7.0
-    version: 11.7.0
+    specifier: ^11.7.1
+    version: 11.7.1
   p-queue:
     specifier: ^8.0.1
     version: 8.0.1
@@ -605,8 +605,8 @@ packages:
       fastq: 1.17.0
     dev: true
 
-  /@paulirish/trace_engine@0.0.12:
-    resolution: {integrity: sha512-PglukOOYGvjqgMVKNSa3a4grWrWzL97L47bgDCzqAnDSTJ+vDOKxMPXR3rsnLECoZzpbb9LCzS3CEg/NwwhRHQ==}
+  /@paulirish/trace_engine@0.0.19:
+    resolution: {integrity: sha512-3tjEzXBBtU83DkCJAdU2UwBBunspiwTCn+Y5jOxm592cfEuLr/T7Lcn+QhRerVqkSik2mnjN4X6NgHZjI9Biwg==}
     dev: true
 
   /@pkgjs/parseargs@0.11.0:
@@ -2050,11 +2050,6 @@ packages:
       '@esbuild/win32-x64': 0.19.12
     dev: true
 
-  /escalade@3.1.1:
-    resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
-    engines: {node: '>=6'}
-    dev: true
-
   /escalade@3.1.2:
     resolution: {integrity: sha512-ErCHMCae19vR8vQGe50xIsVomy19rg6gFu3+r3jkEO46suLMWBksvVyoGgQV+jOfl84ZSOSlmv6Gxa89PmTGmA==}
     engines: {node: '>=6'}
@@ -3279,12 +3274,12 @@ packages:
     resolution: {integrity: sha512-i4jTmg7tvZQFwNFiwB+nCK6a7ICR68Xcwo+VIVd6Spi71vBNFUlds5HiDrSbClZdkQDON2Bhqv+KKJIo5zkPeA==}
     dev: true
 
-  /lighthouse@11.7.0:
-    resolution: {integrity: sha512-oQ9fJyNGibt00Q+046ROZXNcMUwFSEcgsJljww3xLtMkWpq5dnmw7zw39CJFGhXcpAA8D6ayiFuWo7uDXjld/g==}
+  /lighthouse@11.7.1:
+    resolution: {integrity: sha512-QuvkZvobZ8Gjv2Jkxl6TKhV5JYBzU+lzpqTY+Y1iH5IUc1SMYK4IOpBnSpp6PkM2FbNyur9uoNutPhsuLLqGTg==}
     engines: {node: '>=18.16'}
     hasBin: true
     dependencies:
-      '@paulirish/trace_engine': 0.0.12
+      '@paulirish/trace_engine': 0.0.19
       '@sentry/node': 6.19.7
       axe-core: 4.9.0
       chrome-launcher: 1.1.1
@@ -4836,7 +4831,7 @@ packages:
       browserslist: '>= 4.21.0'
     dependencies:
       browserslist: 4.22.3
-      escalade: 3.1.1
+      escalade: 3.1.2
       picocolors: 1.0.0
     dev: true
 
@@ -4847,7 +4842,7 @@ packages:
       browserslist: '>= 4.21.0'
     dependencies:
       browserslist: 4.23.0
-      escalade: 3.1.1
+      escalade: 3.1.2
       picocolors: 1.0.0
     dev: true
 
